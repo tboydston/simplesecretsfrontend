@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Simple Secret Sharing is an easy and secure way to share short secrets and small files. Your secret is encrypted in your browser and the encrypted message is stored on our server. Once it has been viewed a certain number of times or after a certain time period the secret is permanently deleted.">
+  <meta name="author" content="">
+
+  <title>Simple Secret Sharing</title>
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <header id="topnav" class="defaultscroll sticky nav-sticky">
+    <div class="container">
+        <!-- Logo container-->
+        <div>
+            <a class="logo" href="index.html">SimpleSecretSharing<span class="text-primary">.</span></a>
+        </div>                 
+<!--end login button-->
+        <!-- End Logo container-->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <!-- Mobile menu toggle-->
+                <a class="navbar-toggle">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <!-- End mobile menu toggle-->
+            </div>
+        </div>
+
+        <div id="navigation" class="active">
+            <!-- Navigation Menu-->   
+            <ul class="navigation-menu">
+                <li><a href="create.html" >Create Secret</a></li>
+                <li><a href="view.html">Retrieve Secret</a></li> 
+                <li class="active" ><a href="check.html">Check Secret</a></li>
+                <li><a href="encrypt.html">Encrypt Text/File</a></li> 
+                <li><a href="decrypt.html">Decrypt Text/File</a></li>                              
+            </ul><!--end navigation menu-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+  </header>
+
+  <div class="container"></div>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="emptyBox115px" ></div>
+
+    <div class="alert alert-success" role="alert">
+      <b>Note:</b> Checking a secret allows you to see the remaining total views and expiration without using a message view.
+    </div>
+
+    <div class="alert alert-danger fade hide show" id="viewAPIerror" role="alert" style="display:none;">
+      Your secret has either expired, used all it's views, or never existed.
+    </div>
+
+    <form id="tokenForm" >
+      <div class="form-group">
+        <label for="userToken">Your Token</label>
+        <input type="text" class="form-control userToken" id="userToken" >
+        <div class="invalid-feedback">
+          A valid token is 24 characters. Please verify your token and submit again.
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary tokenSubmit" id="tokenSubmit" >Submit</button>
+    </form>
+
+
+  </div>
+  <!-- /.container -->
+
+  <div class="container getSecretResult" id="getSecretResult" style="display:none;" >
+
+    <div class="horizontalBar" ></div>
+
+    <form id="getSecretResultForm" >
+
+        <div class="form-group row">
+          <label for="colFormLabel" class="col-sm-2 col-form-label">Expiration</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control secretViewExpiration" style="background-color:#fff" id="secretViewExpiration" placeholder="Expiration" readonly>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="colFormLabel" class="col-sm-2 col-form-label">Views</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control secretViewViews" style="background-color:#fff" id="secretViewViews" placeholder="Views" readonly>
+          </div>
+        </div>
+
+    </form>
+
+  </div>
+
+ <div class="emptyBox115px" ></div>
+  <!-- Footer -->
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Crypto Js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/aes.min.js"></script>
+
+  <!-- Simple Secrets -->
+  <script src="js/config.js"></script>
+  <script src="js/functions.js"></script>
+  <script src="js/check.js"></script>
+
+</body>
+
+</html>

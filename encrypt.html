@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Simple Secret Sharing is an easy and secure way to share short secrets and small files. Your secret is encrypted in your browser and the encrypted message is stored on our server. Once it has been viewed a certain number of times or after a certain time period the secret is permanently deleted.">
+  <meta name="author" content="">
+
+  <title>Simple Secret Sharing</title>
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script> 
+    $(function(){
+      $("#topnav").load("header.html"); 
+      $("#footer").load("footer.html"); 
+    });
+  </script> 
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <header id="topnav" class="defaultscroll sticky nav-sticky"></header>
+
+  <div class="container"></div>
+
+  <!-- /.container -->
+
+  <div class="container getSecretResult" id="getSecretResult" >
+
+    <div class="emptyBox115px" ></div>
+
+    <div class="alert alert-success" role="alert">
+      <b>Note:</b> Encrypt content or a file that can be decrypted on the "Decrypt" page. Content encrypted here is not saved on our servers.
+    </div>
+
+    <form id="encryptionForm" >
+
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Password</label>
+              <div class="col-sm-10">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="password" placeholder="Password" >
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary showHidePassword" id="showHidePassword" type="button">Hide</button>
+                    <button class="btn btn-outline-secondary copyPassword" type="button">Copy</button>
+                    <button class="btn btn-outline-secondary passwordRandom" type="button" id="passwordRandom">Random</button>
+                  </div>
+                  <div class="invalid-feedback">
+                  Password cannot be empty. 
+                </div>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar passwordStrength" id="passwordStrength" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small id="passwordHelp" class="form-text text-muted">Choose a secure password to encrypt your content. A good password should be at least 8 characters long and contain numbers, letters, and symbols.<b>This password is never sent to our servers and is unrecoverable.</b></small>
+
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Content</label>
+              <div class="col-sm-10">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="background: none;">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="pills-text-tab" data-toggle="pill" href="#pills-text" role="tab" aria-controls="pills-text" aria-selected="true">Text</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="pills-file-tab" data-toggle="pill" href="#pills-file" role="tab" aria-controls="pills-file" aria-selected="false">File</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-text" role="tabpanel" aria-labelledby="pills-text-tab">
+                    <div class="form-group">            
+                      <textarea class="form-control" id="content" rows="5"></textarea>
+                      <div class="invalid-feedback">
+                        Content cannot be empty.
+                      </div>
+                      <small id="textContentHelp" class="form-text text-muted">Enter the text to be encrypted by your browser here. Character Limit: 30000</small>
+                    </div>
+
+                  </div>
+                  <div class="tab-pane fade" id="pills-file" role="tabpanel" aria-labelledby="pills-file-tab">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input fileUpload" id="fileUpload" required>
+                        <label class="custom-file-label" for="fileUpload" id="fileUploadLabel" >Select A File</label>
+                        <div class="invalid-feedback">File must not be empty or less then 1mb.</div>
+                      </div>
+                    <small id="fileContentHelp" class="form-text text-muted">Select a file to be encrypted by your browser.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label"></label>
+              <div class="col-sm-10">
+                <button type="button" class="btn btn-primary encryptButton">Encrypt</button>
+              </div>
+            </div>
+
+    </form>
+
+
+    <form id="resultsForm" style="display:none;" >
+      <div class="horizontalBar" ></div>
+        <div class="form-group row">
+          <label for="colFormLabel" class="col-sm-2 col-form-label">Decrypted Secret</label>
+          <div class="col-sm-10">
+            <textarea class="form-control decryptedContent" id="resultsSecret" style="background-color:#fff" rows="5" readonly></textarea>
+            <small id="decryptedContentHelp" class="form-text text-muted">If you have issues opening a downloaded file confirm the file extension is correct and change it to match the submitted file if it is not. You can also try copying and pasting the decrypted content in your browsers URL bar. If the content is valid the file will download.</small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="colFormLabel" class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <button type="button" id="copyContent" class="btn btn-secondary copyContent">Copy</button>
+            <button type="button" id="downloadContentButton" class="btn btn-secondary downloadContentButton">Download</button>
+          </div>
+        </div>
+
+
+
+    </form>
+
+  </div>
+
+
+ <div class="emptyBox115px" ></div>
+</div>
+
+   <footer class="footer"></footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Crypto Js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/aes.min.js"></script>
+
+  <!-- Simple Secrets -->
+  <!-- <script src="js/main.js"></script> -->
+  <script type="text/javascript" src="mimeTypes.json"></script>
+  <script type="text/javascript" src="js/config.js"></script>
+  <script type="text/javascript" src="js/functions.js"></script>
+  <script type="text/javascript" src="js/encrypt.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+.horizontalBar {
+    border-bottom: 3px solid #e9ecef;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.emptyBox25px {
+	height: 25px;
+}
+
+.emptyBox100px {
+	height: 100px;
+}
+
+.emptyBox115px {
+    height: 115px;
+}
+
+.emptyBox500px {
+    height: 500px;
+}
+
+.error-message {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    margin-left: -150px;
+    width: 300px;
+    z-index: 9999;
+}
+

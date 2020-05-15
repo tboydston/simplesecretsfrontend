@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Simple Secret Sharing is an easy and secure way to share short secrets and small files. Your secret is encrypted in your browser and the encrypted message is stored on our server. Once it has been viewed a certain number of times or after a certain time period the secret is permanently deleted.">
+  <meta name="author" content="">
+
+  <title>Simple Secret Sharing</title>
+
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script> 
+    $(function(){
+      $("#topnav").load("header.html"); 
+      $("#footer").load("footer.html"); 
+    });
+  </script> 
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <header id="topnav" class="defaultscroll sticky nav-sticky">
+    <div class="container">
+        <!-- Logo container-->
+        <div>
+            <a class="logo" href="index.html">SimpleSecretSharing<span class="text-primary">.</span></a>
+        </div>                 
+<!--end login button-->
+        <!-- End Logo container-->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <!-- Mobile menu toggle-->
+                <a class="navbar-toggle">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <!-- End mobile menu toggle-->
+            </div>
+        </div>
+
+        <div id="navigation" class="active">
+            <!-- Navigation Menu-->   
+            <ul class="navigation-menu">
+                <li class="active" ><a href="create.html" >Create Secret</a></li>
+                <li><a href="view.html">Retrieve Secret</a></li> 
+                <li><a href="check.html">Check Secret</a></li>
+                <li><a href="encrypt.html">Encrypt Text/File</a></li> 
+                <li><a href="decrypt.html">Decrypt Text/File</a></li>                              
+            </ul><!--end navigation menu-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+  </header>
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="">
+  
+    </header>
+
+    <!-- Page Features -->
+    <div class="container">
+
+    <div class="emptyBox115px" ></div>
+
+    <div class="alert alert-success" role="alert">
+      <b>Note:</b> Create a self-destructing, encypted secret that expires after a certain number of views or after a time period you specify.
+    </div>
+
+
+    <div>
+      <div class="alert alert-danger alert-dismissible fade error-message apiError" id="apiError" role="alert" style="display:none;">
+        Error reaching API please try again. If the issue persists contact support.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+
+
+      
+      <div class="row" >
+        <div class="col-3 sideTitle" >
+          <h1>Step 1:</h1>
+          <h3>Create your secret</h3>
+        </div>
+        <div class="col-9" >      
+          <form id="encryptionForm" >
+
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Validity</label>
+              <div class="col-sm-10">
+                <select class="form-control validity" id="validity">
+                  <option value="300000" >5 minutes</option>
+                  <option value="600000" >10 minutes</option>
+                  <option value="1800000" >30 minutes</option>
+                  <option value="3600000" >1 hour</option>
+                  <option value="7200000" >2 hours</option>
+                  <option value="21600000" >6 hours</option>
+                  <option value="43200000" >12 hours</option>
+                  <option value="86400000" >1 day</option>
+                  <option value="172800000" >2 day</option>
+                  <option value="604800000" >1 Week</option>
+                  <option value="1209600000" >2 Weeks</option>
+                  <option value="2419200000">1 Month</option>
+                </select>
+                <small id="validityHelp" class="form-text text-muted">Period of time the link is valid for.</small>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Views</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control views" id="views" placeholder="Views" value="10">
+                <div class="invalid-feedback">
+                  Views must be a number between 1 and 100.
+                </div>
+                <small id="viewsHelp" class="form-text text-muted">Number of times the link can be viewed before it is deleted. Max: 100</small>
+
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Password</label>
+              <div class="col-sm-10">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="password" placeholder="Password" >
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary showHidePassword" id="showHidePassword" type="button">Hide</button>
+                    <button class="btn btn-outline-secondary copyPassword" type="button">Copy</button>
+                    <button class="btn btn-outline-secondary passwordRandom" type="button" id="passwordRandom">Random</button>
+                  </div>
+                  <div class="invalid-feedback">
+                  Password cannot be empty. 
+                </div>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar passwordStrength" id="passwordStrength" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small id="passwordHelp" class="form-text text-muted">Choose a secure password to encrypt your content. A good password should be at least 8 characters long and contain numbers, letters, and symbols.<b>This password is never sent to our servers and is unrecoverable.</b></small>
+
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Content</label>
+              <div class="col-sm-10">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="background: none;">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="pills-text-tab" data-toggle="pill" href="#pills-text" role="tab" aria-controls="pills-text" aria-selected="true">Text</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="pills-file-tab" data-toggle="pill" href="#pills-file" role="tab" aria-controls="pills-file" aria-selected="false">File</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-text" role="tabpanel" aria-labelledby="pills-text-tab">
+                    <div class="form-group">            
+                      <textarea class="form-control" id="content" rows="5"></textarea>
+                      <div class="invalid-feedback">
+                        Content cannot be empty.
+                      </div>
+                      <small id="textContentHelp" class="form-text text-muted">Enter the text to be encrypted by your browser here. Character Limit: 30000</small>
+                    </div>
+
+                  </div>
+                  <div class="tab-pane fade" id="pills-file" role="tabpanel" aria-labelledby="pills-file-tab">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input fileUpload" id="fileUpload" required>
+                        <label class="custom-file-label" for="fileUpload" id="fileUploadLabel" >Select A File</label>
+                        <div class="invalid-feedback">File must not be empty or less then 1mb.</div>
+                      </div>
+                    <small id="fileContentHelp" class="form-text text-muted">Select a file to be encrypted by your browser. Maximum size of encypted file: 1mb</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label"></label>
+              <div class="col-sm-10">
+                <button type="button" class="btn btn-primary encryptButton">Encrypt</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- /.row -->
+
+    <div class="container resultsContainer" id="resultsContainer" style="display:none;" >
+
+    <div class="horizontalBar" ></div>
+
+    <div class="row" >
+        <div class="col-3 sideTitle" >
+          <h1>Step 2:</h1>
+          <h3>Submit Your Secret</h3>
+        </div>
+        <div class="col-9" >      
+          <form id="resultsForm" >
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Validity</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control resultsValidity" id="resultsValidity" placeholder="Validity" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Views</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control resultsViews" id="resultsViews" placeholder="Views" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Password</label>
+                <div class="input-group col-sm-10">
+                  <input type="password" class="form-control resultsPassword" id="resultsPassword" placeholder="Password" readonly>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary showHidePasswordResult" id="showHidePasswordResult" type="button">Show</button>
+                    <button class="btn btn-outline-secondary resultsCopyPassword" type="button" id="resultsCopyPassword">Copy</button>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Content</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" id="resultsSecret" rows="5" readonly></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label"></label>
+              <div class="col-sm-10">
+                <button type="button" id="generateLink" class="btn btn-primary generateLink" >Generate Link</button>
+                <button type="button" id="copyContent" class="btn btn-secondary copyContent" >Copy</button>
+                <button type="button" id="downloadContent" class="btn btn-secondary downloadContent" >Download</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    <!-- /.row -->
+
+
+    <div class="container linkContainer" id="linkContainer" style="display:none;" >
+    <div class="horizontalBar" ></div>
+    <div class="row" >
+        <div class="col-3 sideTitle" >
+          <h1>Step 3:</h1>
+          <h3>Share Your Link</h3>
+        </div>
+        <div class="col-9" >      
+          <form id="linkForm" >
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Secret URL</label>
+                <div class="input-group col-sm-10">
+                  <input type="text" class="form-control secretUrl" style="background-color:#fff" id="secretUrl" placeholder="Your Secret's URL" readonly>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary linkCopyButton" type="button" id="linkCopyButton">Copy</button>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Token</label>
+                <div class="input-group col-sm-10">
+                  <input type="text" class="form-control secretToken" style="background-color:#fff" id="secretToken" placeholder="Your Secrets Token" readonly>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary tokenCopyButton" type="button" id="tokenCopyButton">Copy</button>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Expiration</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control secretExpiration" id="secretExpiration" placeholder="Expiration" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="colFormLabel" class="col-sm-2 col-form-label">Total Views</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control totalViews" id="totalViews" placeholder="Total Views" readonly>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+  <div class="emptyBox25px" ></div>
+
+  <!-- Footer -->
+   <footer class="footer">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
+                  <a class="logo-footer" href="#">Simple Secret Sharing<span class="text-primary">.</span></a>
+                  <p class="mt-4">An easy and secure way to share short secrets and small files. Your secret is encrypted in your browser and the encrypted message is stored on our server. Once it has been viewed a certain number of times or after a certain time period the secret is permanently deleted.</p>
+
+              </div><!--end col-->
+              
+              <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+
+              </div><!--end col-->
+              
+              <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+
+              </div><!--end col-->
+
+              <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                  <h4 class="text-light footer-head">Donate</h4>
+                  <p >Find this service useful? Consider a small donation to help pay servers costs.</p>
+                  <div class="p-4">
+
+                      <div class="row pt-2">
+                          <div class="col-12">
+                              <div class="tab-content" id="pills-tabContent">
+                                  <div class="tab-pane fade active show" id="pills-cloud" role="tabpanel" aria-labelledby="pills-cloud-tab">
+                                      <img width=200 src="img/btcaddress.png" ></img>
+                                  </div><!--end teb pane-->
+                                  
+                                  <div  class="tab-pane fade" id="pills-smart" role="tabpanel" aria-labelledby="pills-smart-tab">
+                                      <img width=200 src="img/bchaddress.png" ></img>                     
+                                  </div><!--end teb pane-->
+      
+                                  <div class="tab-pane fade" id="pills-apps" role="tabpanel" aria-labelledby="pills-apps-tab">
+                                      <img width=200 src="img/ethaddress.png" ></img>                     
+                                  </div><!--end teb pane-->
+                              </div><!--end tab content-->
+                          </div><!--end col-->
+                      </div><!--end row-->
+                  </div>
+
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded" id="pills-tab" role="tablist">
+                                  <li class="nav-item">
+                                      <a class="nav-link rounded active" id="pills-cloud-tab" data-toggle="pill" href="#pills-cloud" role="tab" aria-controls="pills-cloud" aria-selected="true">
+                                          <div class="text-center pt-1 pb-1">
+                                              <h4 class="title font-weight-normal mb-0">BTC</h4>
+                                          </div>
+                                      </a><!--end nav link-->
+                                  </li><!--end nav item-->
+                                  
+                                  <li class="nav-item">
+                                      <a class="nav-link rounded" id="pills-smart-tab" data-toggle="pill" href="#pills-smart" role="tab" aria-controls="pills-smart" aria-selected="false">
+                                          <div class="text-center pt-1 pb-1">
+                                              <h4 class="title font-weight-normal mb-0">BCH</h4>
+                                          </div>
+                                      </a><!--end nav link-->
+                                  </li><!--end nav item-->
+                                  
+                                  <li class="nav-item">
+                                      <a class="nav-link rounded" id="pills-apps-tab" data-toggle="pill" href="#pills-apps" role="tab" aria-controls="pills-apps" aria-selected="false">
+                                          <div class="text-center pt-1 pb-1">
+                                              <h4 class="title font-weight-normal mb-0">ETH</h4>
+                                          </div>
+                                      </a><!--end nav link-->
+                                  </li><!--end nav item-->
+                              </ul><!--end nav pills-->
+                          </div><!--end col-->
+                      </div><!--end row-->
+
+              </div><!--end col-->
+          </div><!--end row-->
+      </div><!--end container-->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Crypto Js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/aes.min.js"></script>
+
+  <!-- Simple Secrets -->
+  <!-- <script src="js/main.js"></script> -->
+  <script src="js/config.js"></script>
+  <script src="js/functions.js"></script>
+  <script src="js/create.js"></script>
+
+</body>
+
+</html>
