@@ -1,4 +1,3 @@
-
 function toggleShowHidePassword(div,button){
 
       let passwordDiv = document.getElementById(div)
@@ -265,12 +264,12 @@ function downloadURI(uri, name) {
   delete link;
 }
 
-function extractMimeTypeFileExtension(fileString){
+function extractMimeTypeFileExtension(mimeTypes,fileString){
 
       let mime = fileString.split(';')[0].split(':')[1]
 
-      if ( MIMETYPES.hasOwnProperty(mime) ){
-            return MIMETYPES[mime].extensions[0]
+      if ( mimeTypes.hasOwnProperty(mime) ){
+            return mimeTypes[mime].extensions[0]
       } else {
             return false
       }

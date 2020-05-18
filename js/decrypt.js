@@ -1,4 +1,3 @@
-
 decryptedSecret = ""
 encryptedSecret = ""
 fileName = ""
@@ -8,7 +7,7 @@ $( document ).ready(function() {
 
 
    	$('button.decrypt').on("click", function(){
-   		console.log('here');
+
    		document.getElementById("decryptPassword").classList.remove("is-invalid")	
 
    		let uploadType = checkUploadType();
@@ -52,7 +51,7 @@ $( document ).ready(function() {
 	$('button.downloadContentButton').on("click", function(){
 
 		let now = new Date().getTime()
-		let ext = extractMimeTypeFileExtension(decryptedSecret)
+		let ext = extractMimeTypeFileExtension(mimeTypes,decryptedSecret)
 		let downloadData = decryptedSecret
 
 		if ( !ext ) {
