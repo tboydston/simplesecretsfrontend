@@ -29,3 +29,17 @@
     z-index: 9999;
 }
 
+@media all and (max-width: 750px) {
+
+    .sideTitle {
+        display:none;
+    }
+
+    #createAdditionalOptions{
+        margin-top:10px;
+    }
+
+    #encryptAdditionalOptions .btn {
+        padding: 8px 5px;
+    }
+}

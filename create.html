@@ -30,38 +30,7 @@
 <body>
   <!-- Navigation -->
   <header id="topnav" class="defaultscroll sticky nav-sticky">
-    <div class="container">
-        <!-- Logo container-->
-        <div>
-            <a class="logo" href="index.html">SimpleSecretSharing<span class="text-primary">.</span></a>
-        </div>                 
-<!--end login button-->
-        <!-- End Logo container-->
-        <div class="menu-extras">
-            <div class="menu-item">
-                <!-- Mobile menu toggle-->
-                <a class="navbar-toggle">
-                    <div class="lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </a>
-                <!-- End mobile menu toggle-->
-            </div>
-        </div>
 
-        <div id="navigation" class="active">
-            <!-- Navigation Menu-->   
-            <ul class="navigation-menu">
-                <li class="active" ><a href="create.html" >Create Secret</a></li>
-                <li><a href="view.html">Retrieve Secret</a></li> 
-                <li><a href="check.html">Check Secret</a></li>
-                <li><a href="encrypt.html">Encrypt Text/File</a></li> 
-                <li><a href="decrypt.html">Decrypt Text/File</a></li>                              
-            </ul><!--end navigation menu-->
-        </div><!--end navigation-->
-    </div><!--end container-->
   </header>
 
 
@@ -139,7 +108,7 @@
               <div class="col-sm-10">
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" id="password" placeholder="Password" >
-                  <div class="input-group-append">
+                  <div class="input-group-append" id="createAdditionalOptions">
                     <button class="btn btn-outline-secondary showHidePassword" id="showHidePassword" type="button">Hide</button>
                     <button class="btn btn-outline-secondary copyPassword" type="button">Copy</button>
                     <button class="btn btn-outline-secondary passwordRandom" type="button" id="passwordRandom">Random</button>
@@ -311,80 +280,8 @@
   <div class="emptyBox25px" ></div>
 
   <!-- Footer -->
-   <footer class="footer">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
-                  <a class="logo-footer" href="#">Simple Secret Sharing<span class="text-primary">.</span></a>
-                  <p class="mt-4">An easy and secure way to share short secrets and small files. Your secret is encrypted in your browser and the encrypted message is stored on our server. Once it has been viewed a certain number of times or after a certain time period the secret is permanently deleted.</p>
-
-              </div><!--end col-->
-              
-              <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-
-              </div><!--end col-->
-              
-              <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-
-              </div><!--end col-->
-
-              <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                  <h4 class="text-light footer-head">Donate</h4>
-                  <p >Find this service useful? Consider a small donation to help pay servers costs.</p>
-                  <div class="p-4">
-
-                      <div class="row pt-2">
-                          <div class="col-12">
-                              <div class="tab-content" id="pills-tabContent">
-                                  <div class="tab-pane fade active show" id="pills-cloud" role="tabpanel" aria-labelledby="pills-cloud-tab">
-                                      <img width=200 src="img/btcaddress.png" ></img>
-                                  </div><!--end teb pane-->
-                                  
-                                  <div  class="tab-pane fade" id="pills-smart" role="tabpanel" aria-labelledby="pills-smart-tab">
-                                      <img width=200 src="img/bchaddress.png" ></img>                     
-                                  </div><!--end teb pane-->
-      
-                                  <div class="tab-pane fade" id="pills-apps" role="tabpanel" aria-labelledby="pills-apps-tab">
-                                      <img width=200 src="img/ethaddress.png" ></img>                     
-                                  </div><!--end teb pane-->
-                              </div><!--end tab content-->
-                          </div><!--end col-->
-                      </div><!--end row-->
-                  </div>
-
-                      <div class="row">
-                          <div class="col-lg-12">
-                              <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded" id="pills-tab" role="tablist">
-                                  <li class="nav-item">
-                                      <a class="nav-link rounded active" id="pills-cloud-tab" data-toggle="pill" href="#pills-cloud" role="tab" aria-controls="pills-cloud" aria-selected="true">
-                                          <div class="text-center pt-1 pb-1">
-                                              <h4 class="title font-weight-normal mb-0">BTC</h4>
-                                          </div>
-                                      </a><!--end nav link-->
-                                  </li><!--end nav item-->
-                                  
-                                  <li class="nav-item">
-                                      <a class="nav-link rounded" id="pills-smart-tab" data-toggle="pill" href="#pills-smart" role="tab" aria-controls="pills-smart" aria-selected="false">
-                                          <div class="text-center pt-1 pb-1">
-                                              <h4 class="title font-weight-normal mb-0">BCH</h4>
-                                          </div>
-                                      </a><!--end nav link-->
-                                  </li><!--end nav item-->
-                                  
-                                  <li class="nav-item">
-                                      <a class="nav-link rounded" id="pills-apps-tab" data-toggle="pill" href="#pills-apps" role="tab" aria-controls="pills-apps" aria-selected="false">
-                                          <div class="text-center pt-1 pb-1">
-                                              <h4 class="title font-weight-normal mb-0">ETH</h4>
-                                          </div>
-                                      </a><!--end nav link-->
-                                  </li><!--end nav item-->
-                              </ul><!--end nav pills-->
-                          </div><!--end col-->
-                      </div><!--end row-->
-
-              </div><!--end col-->
-          </div><!--end row-->
-      </div><!--end container-->
+   <footer class="footer" id="footer">
+ 
   </footer>
 
   <!-- Bootstrap core JavaScript -->

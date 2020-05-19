@@ -18,43 +18,20 @@
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script> 
+    $(function(){
+      $("#topnav").load("header.html") 
+      $("#footer").load("footer.html")
+    });
+  </script> 
+
+
 </head>
 
 <body>
   <!-- Navigation -->
   <header id="topnav" class="defaultscroll sticky nav-sticky">
-    <div class="container">
-        <!-- Logo container-->
-        <div>
-            <a class="logo" href="index.html">SimpleSecretSharing<span class="text-primary">.</span></a>
-        </div>                 
-<!--end login button-->
-        <!-- End Logo container-->
-        <div class="menu-extras">
-            <div class="menu-item">
-                <!-- Mobile menu toggle-->
-                <a class="navbar-toggle">
-                    <div class="lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </a>
-                <!-- End mobile menu toggle-->
-            </div>
-        </div>
-
-        <div id="navigation" class="active">
-            <!-- Navigation Menu-->   
-            <ul class="navigation-menu">
-                <li><a href="create.html" >Create Secret</a></li>
-                <li><a href="view.html">Retrieve Secret</a></li> 
-                <li class="active" ><a href="check.html">Check Secret</a></li>
-                <li><a href="encrypt.html">Encrypt Text/File</a></li> 
-                <li><a href="decrypt.html">Decrypt Text/File</a></li>                              
-            </ul><!--end navigation menu-->
-        </div><!--end navigation-->
-    </div><!--end container-->
   </header>
 
   <div class="container"></div>
@@ -118,9 +95,6 @@
 
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Crypto Js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
