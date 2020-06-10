@@ -89,7 +89,7 @@ $( document ).ready(function() {
 		    data: JSON.stringify({
 		        "ValidPeriod": convertVaidity(resultsForm.resultsValidity.value),	
 		        "Message": resultsForm.resultsSecret.value,
-		        "TotalViews": parseInt(resultsForm.resultsViews.value)
+		        "TotalViews": parseInt(resultsForm.resultsViews.value),
 		        "Token": resultsForm.captchaToken.value
 		    })
 		})
