@@ -276,4 +276,13 @@ function extractMimeTypeFileExtension(mimeTypes,fileString){
       
 }
 
+function captchaValid(token){
+  console.log(token)
+  document.getElementById("captchaToken").value = token
+}
+
+function captchaInvalid(){
+  document.getElementById("captchaToken").classList.add("is-invalid")
+}
+
 

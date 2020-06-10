@@ -5,6 +5,11 @@ encryptedSecret = ""
 
 $( document ).ready(function() {
 
+	if( USECAPTCHA == true ) {
+		console.log("USE CAPTHCA")
+		hcaptcha.render('h-captcha', { 'sitekey':CAPTCHASITEKEY, 'callback':'captchaValid', 'error':'captchaInvalid', 'expire':'captchaInvalid' });
+	}
+
 	$('button.encryptButton').on("click", function(){
 	
 		let iv = IV
@@ -62,12 +67,18 @@ $( document ).ready(function() {
 
 	$('button.generateLink').on("click", function(){
 
+		if( USECAPTCHA == true && resultsForm.captchaToken.value == "" ) {
+			document.getElementById("captchaToken").classList.add("is-invalid")
+			hcaptcha.reset()
+			return
+		}
+
 		$('#apiError').hide()	
 
 		console.log( "We are not creating your secret." );
 		console.log( "This is the content: "+resultsForm.resultsSecret.value );
 		console.log( "The unencrypted version never touches our server.")
-
+		
 		jQuery.ajax({
 		    url: APIADDRESS,
 		    type: "POST",
@@ -79,6 +90,7 @@ $( document ).ready(function() {
 		        "ValidPeriod": convertVaidity(resultsForm.resultsValidity.value),	
 		        "Message": resultsForm.resultsSecret.value,
 		        "TotalViews": parseInt(resultsForm.resultsViews.value)
+		        "Token": resultsForm.captchaToken.value
 		    })
 		})
 		.done(function(data, textStatus, jqXHR) {
@@ -190,6 +202,13 @@ $( document ).ready(function() {
 	
 	document.getElementById('fileUpload').addEventListener('change', handleFileSelect, false);
 
+	$('span.resetCaptcha').on("click", function(){
+		console.log('click')
+	    document.getElementById("captchaToken").classList.remove("is-invalid")
+	    hcaptcha.reset()
+	})
+
+
 });
 
 function validateCreateForm ( views, password ){
@@ -208,6 +227,15 @@ function validateCreateForm ( views, password ){
 
     return errors
 
+}
+
+
+function captchaValid(token){
+  document.getElementById("captchaToken").value = token
+}
+
+function captchaInvalid(){
+  document.getElementById("captchaToken").classList.add("is-invalid")
 }
 
 
